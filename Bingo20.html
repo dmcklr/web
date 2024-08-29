@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="bingo.css">
+    <style>
+.gray {
+    color:rgba(128, 128, 128, 0.502);
+}
+#pickNumber {
+    padding: 25px;
+    background-color: red;
+    border: 0;
+    border-radius: 15px;
+    width: calc(100% - 20px);
+    position: absolute;
+    min-height:100px;
+    bottom: 10px;
+    color:#ffffff;
+}
+body {
+    margin:10px;
+}
+#davidsEinschulung {
+    background-color: rgb(123, 252, 106);
+    padding:5px;
+    border-spacing:3px;
+}
+#davidsEinschulung td {
+    border-radius: 15px;
+    padding:2px 5px;
+    text-align: center;
+    margin:2px;
+}
+
+#davidsEinschulung td.gezogen {
+    background-color: #ffffff;
+    border:1px solid white;
+}
+
+    </style>
+    <title>Bingo 20</title>
+</head>
+<body>
+<h1 style="text-align: center" id="test">Bingo 20!</h1>
+<button id="tabelleAnzeigen">Ergebnistabelle anzeigen</button>
+<button id="neustart">Neustart</button>
+<br>
+
+<h1 style="color:green;font-weight: 600;font-size:4em;text-align: center;" id="currentNumber">&nbsp;</h1>
+
+<br>
+Alle gezogenen:
+<br>
+<span id="selectedNumbers"></span>
+<br><br>
+<div id="results">
+    <table border="1" id="davidsEinschulung">
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>12</td>
+                <td>13</td>
+                <td>14</td>
+                <td class="">15</td>
+                <td class="">16</td>
+                <td>17</td>
+                <td>18</td>
+                <td>19</td>
+                <td>20</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!--
+<span class="gray">Restliche Nummern:</span><br>
+<span class="gray" id="allNumbers"></span>
+!-->
+<br><br><br>
+<button id="pickNumber">Zahl ziehen</button>
+</body>
+<script>
+var allNumbers = createAllNumbers();
+var selected = [];
+
+$("#tabelleAnzeigen").click(function() {
+    $("#results").slideToggle(1000)
+});
+$("#results").click(function() {
+    $("#results").slideToggle(1000)
+});
+
+function createAllNumbers() {
+    var allnumbers = [];
+    for (var i = 1; i <= 20; i++) {
+        allnumbers.push(i);
+        $("#allNumbers").append(i + " ");
+    }
+    return allnumbers;
+}
+
+$("#pickNumber").click(function() {
+    pickNumber();
+});
+
+function pickNumber() {
+    if (allNumbers.length === 0) {
+        alert("Alle Nummern sind schon gezogen!");
+        return;
+    }
+    // Get a random index from the allNumbers array
+    var randomIndex = Math.floor(Math.random() * allNumbers.length);
+
+    // Get the number at that random index
+    var selectedNumber = allNumbers[randomIndex];
+
+    // Remove the selected number from the allNumbers array
+    allNumbers.splice(randomIndex, 1);
+
+    // Add the selected number to the selected array
+    selected.push(selectedNumber);
+    /*
+    selected.sort(function(a, b) {
+        return a - b;
+    });
+    */
+    // Update the UI
+    $("#davidsEinschulung td").each(function() {
+        var inhalt = $(this).text()
+        if(inhalt == selectedNumber) {
+            $(this).addClass("gezogen")
+        }
+    });
+
+    let formattedText = selected.join(' - ');
+    $("#selectedNumbers").text("").text(formattedText)
+    $("#currentNumber").text(selectedNumber)
+    $("#allNumbers").text(allNumbers.join(" "));
+}
+    
+$("#neustart").click(function() {
+    location.reload(true)
+});
+
+window.addEventListener('beforeunload', function (event) {
+    // Standardtext für die Bestätigungsbox (wird von manchen Browsern ignoriert)
+    var message = 'Sind Sie sicher, dass Sie die Seite verlassen möchten?';
+
+    // Bestätigungsnachricht setzen
+    event.returnValue = message;
+
+    // Rückgabe des Nachrichten-Strings (wird von den meisten modernen Browsern ignoriert)
+    return message;
+});
+
+$("body").keydown(function(event) {
+    if (event.key === "Enter") {
+        // Prevent the default action (e.g., form submission)
+        event.preventDefault();
+        // Call the function
+        pickNumber()
+    }
+});
+
+</script>
+</html>
+
