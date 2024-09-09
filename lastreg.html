@@ -8,20 +8,33 @@
         body {
             font-family: Arial, sans-serif;
         }
-        #result {
-            white-space: pre-wrap;
-            background-color: #f4f4f4;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-top: 20px;
+        #flag {
+            margin-top:10px;
+            width:100px;
         }
+
     </style>
 </head>
 <body>
+    <script type="text/javascript">
+        <!--
+          var RRReg_eventid="307901";
+          var RRReg_name="Onsite Registration";
+          var RRReg_key="aFQwFjYWFUt3";
+          var RRReg_server="https://events2.raceresult.com";
+        -->
+        </script>
+        <script type="text/javascript" src="https://events2.raceresult.com/registrations/init.js?lang=de"></script>
+        <style>
+          /* Add custom CSS here or elsewhere to change the design */
+        </style>
+        <br>
+        <br>
 
-<h1>API-Daten alle Sekunde abrufen</h1>
+
+<p>API-Daten, jede Sekunde aktualisiert:</p>
 <div id="result">Warten auf Daten...</div>
+<img id="flag"></div>
 
 <script>
     // Funktion zum Abrufen der API
@@ -33,6 +46,9 @@
             }
             const data = await response.json();
             document.getElementById('result').textContent = JSON.stringify(data, null, 2);
+            var nation = data[0].nation;
+            var flagUrl = "https://events.raceresult.com/graphics/flags/" + nation + ".gif";
+            document.getElementById('flag').setAttribute('src', flagUrl);
         } catch (error) {
             document.getElementById('result').textContent = 'Fehler: ' + error.message;
         }
