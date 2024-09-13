@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RACE RESULT World Map</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="world-map.css" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<div class="salesmap_filters" id="salesmap_filters"> 
+  <div>
+    <b>Features</b><br>
+    <form id="features">
+      <label>
+          <input type="checkbox" name="hasChippingMachine" value="hasChippingMachine">
+          has Chipping Machine
+      </label><br>
+      <label>
+          <input type="checkbox" name="activeTransponders" value="activeTransponders">
+          has Active Transponders
+      </label><br>
+      <label>
+          <input type="checkbox" name="passiveTransponders" value="passiveTransponders">
+          has Passive Transponders
+      </label><br>
+    </form>
+  </div>
+  <div>
+    <b>Type</b><br>
+    <form id="types">
+      <label>
+        <input type="checkbox" name="Customer" value="Customer">
+        Customer
+    </label><br>
+      <label>
+          <input type="checkbox" name="Office" value="Office" checked>
+        RACE RESULT Office
+      </label><br>
+      <label>
+          <input type="checkbox" name="Distributor" value="Distributor" checked>
+          RACE RESULT Distributor
+      </label><br>
+      <label>
+          <input type="checkbox" name="Reseller" value="Reseller" checked>
+          RACE RESULT Reseller
+      </label><br>
+    </form>
+  </div>
+</div>
+
+<div id="map"></div>
+
+</body>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script src="world-map.js"></script>
+
+</html>

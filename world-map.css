@@ -1,0 +1,126 @@
+body {
+font-size: 13.5px;
+font-weight: 300;
+margin: 0;
+padding: 0;
+overflow: Auto;
+font-family: Arial, sans-serif;
+color: #2c2c2c;
+height: 100vh;
+overflow: hidden;
+background-color:#737373;
+}
+#map {
+height: 100vh;
+width:100vw;
+}
+.leaflet-attribution-flag {
+display: none !important;
+}
+.leaflet-popup-content img {
+    height:100px;
+}
+.leaflet-popup-content {
+    display: flex;
+    width: 280px !important;
+    gap: 15px;
+    margin: 10px;
+    height: 100%;
+    align-items: center;
+    color:white;
+    font-size:1.2em;
+}
+.leaflet-popup-content  > div:first-of-type {
+    height: 80px;
+    aspect-ratio: 1;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 150px;
+}
+.leaflet-popup-content  > div:last-of-type {
+    padding: 10px 0;
+}
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+    background: #c41011;
+}
+.leaflet-popup-content  > div:last-of-type span {
+    font-size: 0.8em;
+    line-height:25px;
+}
+.leaflet-container a.leaflet-popup-close-button {
+    top: 5px;
+    right: 5px;
+    color:#ffffff;
+}
+.leaflet-container a.leaflet-popup-close-button:hover, .leaflet-container a.leaflet-popup-close-button:focus {
+    color:#ffffff;
+}
+.salesmap_filters #filter-staff >{
+    text-align: left;
+    padding-left:25px;    
+}
+.salesmap_filters #filter-staff label input {
+    padding-right: 10px;      
+}
+#filter-staff > div {
+    padding-left:25px;
+}
+
+
+#filter-dates > div {
+    display: flex;
+    flex-direction: column;
+}
+
+#filter-dates div label:not(:first-child) {
+ padding-left: 20px;
+}
+
+.salesmap_filters {
+    display:flex;
+    position:absolute;
+    left:0px;
+    bottom:0;
+    z-index:1000;
+    gap: 10px;
+    padding:10px;
+    background-color:#73737382;
+}
+#salesmap_filters_toggle {
+    background-color:rgba(255, 255, 255, 0.769);
+    min-width:40px;
+    max-width: 30px;
+    height:40px;
+    position:absolute;
+    top:-40px;
+    left:10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size:20px;
+    background-image: url('graphics/arrow_up.png');
+    background-size: contain;
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    border-radius:0;
+    padding:0;
+}
+
+.salesmap_filters > div {
+    min-width:200px;
+    border-radius: 10px;
+    background-color: #ffffffa1;
+    padding:10px;      
+}
+.selecting-location {
+    cursor: crosshair; /* Change cursor to crosshair */
+}
+.salesmap_filters #select_new_trip.selected {
+    background-color:red;
+}
+.salesmap_filters #save_new_trip {
+    display:none;
+}
