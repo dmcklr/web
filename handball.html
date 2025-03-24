@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Jugend SV Langensteinbach</title>
+</head>
+
+
+<style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+    .video-section, #handball-tabelle,  #handball-spielplan{
+      margin: 20px 0;
+      width: 100%;
+      max-width: 680px;
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    .video-section h2 {
+      display: flex;
+      align-items: center;
+      font-size: 1.5rem;
+    }
+    .video-section h2 i {
+      font-size: 1.5rem;
+      margin-right: 10px;
+    }
+    video {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+
+  </style>
+
+
+<body>
+    <script>
+        (function(e,t,n,r,i,s,o){e[i]=e[i]||function(){(e[i].q=e[i].q||[]).push(arguments)}, e[i].l=1*new Date;s=t.createElement(n),o=t.getElementsByTagName(n)[0];s.async=1; s.src=r;o.parentNode.insertBefore(s,o)})(window,document,"script", 'https://www.handball.net/widgets/embed/v1.js',"_hb");
+        </script>
+
+    <h1>🤾‍♂️ Handball Julius 🤾‍♂️</h1>
+
+    <div id='handball-tabelle'></div>
+
+    <div id='handball-spielplan'></div>
+
+    <script>
+        _hb({
+        widget: 'tabelle',
+        teamId: 'handball4all.baden.1171911',
+        container: 'handball-tabelle'
+        })
+
+        _hb({
+            widget: 'spielplan',
+            teamId: 'handball4all.baden.1171911',
+            container: 'handball-spielplan'
+            })
+        </script>
+
+
+</body>
+</html>
