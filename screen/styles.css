@@ -85,21 +85,34 @@ body {
     transform: rotate(-45deg);
     transform-origin: center;
 }
-
-/* ===================== */
-/* Slider-Elemente       */
-/* ===================== */
+/* Grundlayout deiner Slides */
 .picture-box-inner .slide {
     position: absolute;
     inset: 0;
     background-size: cover;
     background-position: center;
-    
-    transition: opacity 1s ease-in-out;
+    opacity: 0;
+    animation: fade 32s linear infinite;
 }
 
-.picture-box-inner .slide.active {
-    opacity: 1;
+/* 8 Bilder, gleichmäßig über 32s verteilt
+   -> jedes Bild hat effektiv 4s Slot */
+.picture-box-inner .slide:nth-child(1) { animation-delay: 0s; }
+.picture-box-inner .slide:nth-child(2) { animation-delay: -4s; }
+.picture-box-inner .slide:nth-child(3) { animation-delay: -8s; }
+.picture-box-inner .slide:nth-child(4) { animation-delay: -12s; }
+.picture-box-inner .slide:nth-child(5) { animation-delay: -16s; }
+.picture-box-inner .slide:nth-child(6) { animation-delay: -20s; }
+.picture-box-inner .slide:nth-child(7) { animation-delay: -24s; }
+.picture-box-inner .slide:nth-child(8) { animation-delay: -28s; }
+
+/* Crossfade-Animation (bezogen auf den 4s-Slot pro Bild) */
+@keyframes fade {
+    0%   { opacity: 0; }
+    5%   { opacity: 1; }   /* einblenden */
+    25%  { opacity: 1; }   /* voll sichtbar */
+    30%  { opacity: 0; }   /* ausblenden */
+    100% { opacity: 0; }
 }
 
 .logo img {

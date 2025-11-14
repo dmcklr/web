@@ -45,17 +45,4 @@
 </body>
 
 
-<script>
-    const slides = document.querySelectorAll('.picture-box-inner .slide');
-let index = 0;
-
-function showNextSlide() {
-    slides.forEach(slide => slide.classList.remove('active'));
-    slides[index].classList.add('active');
-    index = (index + 1) % slides.length;
-}
-
-showNextSlide(); // erstes Bild anzeigen
-setInterval(showNextSlide, 4000); // alle 4 Sekunden wechseln
-</script>
 </html>
