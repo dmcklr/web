@@ -71,8 +71,7 @@ body {
     aspect-ratio: 1;
     border-radius: 4rem;
     overflow: hidden;
-    transform: rotate(45deg);
-    /* background: none;  <-- entfernen */
+    /* transform: rotate(45deg); */
 }
 
 .picture-box-inner {
@@ -81,17 +80,19 @@ body {
     left: -30%;
     width: 115%;
     height: 100%;
-    transform: rotate(-45deg);
-    transform-origin: center;
+   /* transform: rotate(-45deg);
+    transform-origin: center; */
+}
+.picture-box-inner .slide {
 }
 
-.picture-box-inner .slide {
+.picture-box-inner .slide:first-of-type {
     position: absolute;
     inset: 0;
     background-size: cover;
     background-position: center;
-    opacity: 0;
-    animation: fade 32s linear infinite;
+    opacity: 1;
+
 }
 
 .picture-box-inner .slide:nth-child(1) { animation-delay: 0s; }
