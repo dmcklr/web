@@ -1,0 +1,198 @@
+/* Grund-Layout */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: urw-din, Helvetica, Arial, sans-serif;
+    background: #0f172a;           /* dunkles Blau */
+    color: #e5e7eb;     
+    background: linear-gradient(247deg,rgba(231, 51, 49, 1) 0%, rgba(168, 24, 21, 1) 100%);
+}
+
+/* Vollbild-Container */
+
+.screen {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 32px;
+    gap: 24px;
+    overflow: hidden;
+    position: relative;
+}
+
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+
+}
+.logo {   
+    align-items: center;
+    gap: 12px;
+    display:none;
+}
+.main-content {
+    position:relative;
+    overflow: hidden;
+}
+.welcome h1 {
+    font-size:12rem;
+    margin-left:3rem;
+    margin-top:1rem;
+    font-weight:600;
+}
+.welcome h2 {
+    font-size:4.25rem;
+    margin-left:3rem;
+    margin-top:0rem;
+    font-weight:600;
+    font-style: italic;
+}
+
+.picture-box {
+    position: absolute;
+    right: -3.5%;
+    bottom: -24%;
+    height: 100vh;
+    width: 100vh;
+    aspect-ratio: 1;
+
+    border-radius: 4rem;
+    overflow: hidden;
+    transform: rotate(45deg);
+    background: none;
+}
+
+.picture-box-inner {
+    position: absolute;
+    top: -5%;
+    left: -30%;
+    width: 115%;
+    height: 100%;
+    transform: rotate(-45deg);
+    transform-origin: center;
+}
+
+/* ===================== */
+/* Slider-Elemente       */
+/* ===================== */
+.picture-box-inner .slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.picture-box-inner .slide.active {
+    opacity: 1;
+}
+
+.logo img {
+    height:10rem
+}
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #38bdf8;
+}
+
+.header-right {
+    text-align: right;
+}
+
+.building-name {
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.tagline {
+    font-size: 0.95rem;
+    color: #94a3b8;
+    margin-top: 4px;
+}
+
+/* Hauptbereich */
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Große Info-Box oben */
+
+.info-box {
+    background: radial-gradient(circle at top left, #1d4ed8, #020617);
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 0 25px 50px rgba(15, 23, 42, 0.8);
+}
+
+.info-box h1 {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+}
+
+.info-box p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+}
+
+/* Karten-Grid für Infos */
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: rgba(15, 23, 42, 0.9);
+    border-radius: 20px;
+    padding: 20px;
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    box-shadow: 0 15px 30px rgba(15, 23, 42, 0.6);
+}
+
+.card h2 {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+    color: #e5e7eb;
+}
+
+.card p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #cbd5f5;
+}
+
+/* Footer */
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #64748b;
+    border-top: 1px solid rgba(148, 163, 184, 0.4);
+    padding-top: 12px;
+}
+
+/* Responsiv für kleinere Screens (falls mal Laptop, Tablet etc.) */

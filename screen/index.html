@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Seite alle 300 Sekunden (5 Minuten) neu laden -->
+    <meta http-equiv="refresh" content="300">
+    <link rel="stylesheet" href="https://use.typekit.net/kng6cpn.css?v=v1.2.69">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="screen">
+        <section class="picture-box"> 
+            <div class="picture-box-inner">
+                <div class="slide" style="background-image:url('images/berlin.JPG')"></div>
+                <div class="slide" style="background-image:url('images/ironman.JPG')"></div>
+                <div class="slide" style="background-image:url('images/erzberg.jpg')"></div>
+                <div class="slide" style="background-image:url('images/spartan.JPG')"></div>
+                <div class="slide" style="background-image:url('images/berlin2.JPG')"></div>
+                <div class="slide" style="background-image:url('images/trail.JPG')"></div>
+                <div class="slide" style="background-image:url('images/deka.JPG')"></div>
+                <div class="slide" style="background-image:url('images/mtb.JPG')"></div>
+
+
+            </div>              
+        </section> 
+        <header class="header">
+            <div class="welcome">
+                <h1>Welcome</h1>
+                <h2>Distributors Meeting 2025</h2>
+            </div>
+            <div class="logo">
+                <!-- Optional: Hier könnte ein <img> statt Text hin -->
+                <img src="https://images.raceresult.com/website/logo-white.png" alt="">
+            </div>
+            
+        </header>
+
+        <main class="main-content">            
+        </main>
+
+        <footer class="footer">          
+        </footer>
+    </div>
+</body>
+
+
+<script>
+    const slides = document.querySelectorAll('.picture-box-inner .slide');
+let index = 0;
+
+function showNextSlide() {
+    slides.forEach(slide => slide.classList.remove('active'));
+    slides[index].classList.add('active');
+    index = (index + 1) % slides.length;
+}
+
+showNextSlide(); // erstes Bild anzeigen
+setInterval(showNextSlide, 4000); // alle 4 Sekunden wechseln
+</script>
+</html>
