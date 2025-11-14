@@ -69,11 +69,10 @@ body {
     height: 100vh;
     width: 100vh;
     aspect-ratio: 1;
-    background: linear-gradient(134deg,rgba(231, 51, 49, 1) 0%, rgba(168, 24, 21, 1) 100%);
     border-radius: 4rem;
     overflow: hidden;
     transform: rotate(45deg);
-    background: none;
+    /* background: none;  <-- entfernen */
 }
 
 .picture-box-inner {
@@ -85,7 +84,7 @@ body {
     transform: rotate(-45deg);
     transform-origin: center;
 }
-/* Grundlayout deiner Slides */
+
 .picture-box-inner .slide {
     position: absolute;
     inset: 0;
@@ -95,8 +94,6 @@ body {
     animation: fade 32s linear infinite;
 }
 
-/* 8 Bilder, gleichmäßig über 32s verteilt
-   -> jedes Bild hat effektiv 4s Slot */
 .picture-box-inner .slide:nth-child(1) { animation-delay: 0s; }
 .picture-box-inner .slide:nth-child(2) { animation-delay: -4s; }
 .picture-box-inner .slide:nth-child(3) { animation-delay: -8s; }
@@ -106,12 +103,11 @@ body {
 .picture-box-inner .slide:nth-child(7) { animation-delay: -24s; }
 .picture-box-inner .slide:nth-child(8) { animation-delay: -28s; }
 
-/* Crossfade-Animation (bezogen auf den 4s-Slot pro Bild) */
 @keyframes fade {
     0%   { opacity: 0; }
-    5%   { opacity: 1; }   /* einblenden */
-    25%  { opacity: 1; }   /* voll sichtbar */
-    30%  { opacity: 0; }   /* ausblenden */
+    5%   { opacity: 1; }
+    25%  { opacity: 1; }
+    30%  { opacity: 0; }
     100% { opacity: 0; }
 }
 
