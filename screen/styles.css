@@ -69,7 +69,7 @@ body {
     height: 100vh;
     width: 100vh;
     aspect-ratio: 1;
-
+    background: linear-gradient(134deg,rgba(231, 51, 49, 1) 0%, rgba(168, 24, 21, 1) 100%);
     border-radius: 4rem;
     overflow: hidden;
     transform: rotate(45deg);
@@ -184,15 +184,8 @@ body {
     color: #cbd5f5;
 }
 
-/* Footer */
+/* Foter */
 
-.footer {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.9rem;
-    color: #64748b;
-    border-top: 1px solid rgba(148, 163, 184, 0.4);
-    padding-top: 12px;
-}
+
 
 /* Responsiv für kleinere Screens (falls mal Laptop, Tablet etc.) */
