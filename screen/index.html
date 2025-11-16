@@ -12,17 +12,22 @@
 </head>
 <body>
     <div class="screen">
-        <section class="picture-box"> 
-            <div class="picture-box-inner">
-                <div class="slide">
-                    <img src="berlin.jpg" alt="">
-                </div>
-                
-            </div>              
-        </section>   
+        <img src="red-bg.png" class="red-bg" alt="">
+        <div class="pics">
+            <img src="images/berlin.jpg" alt="" class="active">
+            <img src="images/ironman.jpg" alt="">
+            <img src="images/erzberg.jpg" alt="">
+            <img src="images/spartan.jpg" alt="">
+            <img src="images/berlin2.jpg" alt="">
+            <img src="images/mtb.jpg" alt="">
+            <img src="images/deka.jpg" alt="">
+            <img src="images/trail.jpg" alt="">
+        </div>
+
+
         <header class="header">
             <div class="welcome">
-                <h1>Welcome6</h1>
+                <h1>Welcome</h1>
                 <h2>Distributors Meeting 2025</h2>
             </div>
             <div class="logo">
@@ -40,5 +45,16 @@
     </div>
 </body>
 
+<script>
+    const intervalTime = 5000; // 4 Sekunden
 
+const pics = document.querySelectorAll('.pics img');
+let index = 0;
+
+setInterval(() => {
+    pics[index].classList.remove('active');        // aktuelle entfernen
+    index = (index + 1) % pics.length;             // nächste, mit Rücksprung
+    pics[index].classList.add('active');           // neue setzen
+}, intervalTime);
+</script>
 </html>

@@ -16,28 +16,35 @@ body {
     font-family: urw-din, Helvetica, Arial, sans-serif;
     background: #0f172a;           /* dunkles Blau */
     color: #e5e7eb;     
-    background: linear-gradient(247deg,rgba(231, 51, 49, 1) 0%, rgba(168, 24, 21, 1) 100%);
+    backgroundw: linear-gradient(247deg,rgba(231, 51, 49, 1) 0%, rgba(168, 24, 21, 1) 100%);
 }
 
 /* Vollbild-Container */
+
+.red-bg {
+    position:absolute;
+    width:100%;
+    height:100%;
+    left:0;
+    top:0;
+    z-index:3;
+}
 
 .screen {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    padding: 32px;
     gap: 24px;
     overflow: hidden;
     position: relative;
 }
-
 
 .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 24px;
-
+    z-index:500;
 }
 .logo {   
     align-items: center;
@@ -50,33 +57,43 @@ body {
 }
 .welcome h1 {
     font-size:12rem;
-    margin-left:3rem;
+    margin-left:4rem;
     margin-top:1rem;
     font-weight:600;
 }
 .welcome h2 {
     font-size:4.25rem;
-    margin-left:3rem;
+    margin-left:4rem;
     margin-top:0rem;
     font-weight:600;
     font-style: italic;
 }
-.picture-box {
-    position: absolute;
-    right: 3rem;
-    bottom: 3rem;
-    width: 600px;
-    height: 350px;
-    overflow: hidden;
-    border-radius: 2rem;
-}
 
-/* Kein object-fit nötig, sondern klassisch über width/height */
-.picture-img {
+.pics {
+    position:absolute;
+    right:0;
+    bottom:0;
+    width:74%;
+    height: 98%; 
+    z-index:1;
+    
+}
+.pics img {
+  position: absolute;
     width: 100%;
     height: 100%;
-    display: block;
+    object-fit: cover;    /* zeigt das gesamte Bild */
+    left: 0;
+    top: 0;
+    opacity: 0;
+    background: #000;
+    transition: opacity 2s;
+
 }
+.pics img.active {
+    opacity: 1;
+}
+
 
 
 .logo img {
