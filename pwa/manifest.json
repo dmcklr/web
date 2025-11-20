@@ -1,6 +1,6 @@
 {
-  "name": "PWA Test App",
-  "short_name": "TestPWA",
+  "name": "PWA YouTube App",
+  "short_name": "YouTubePWA",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
