@@ -2,6 +2,8 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ffffff">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>RACE RESULT Player</title>
   <style>
@@ -452,6 +454,11 @@
     // Erstes Video laden
     if (videos.length > 0) {
       loadVideo(videos[0].id, false);
+    }
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('./sw.js')
+        .catch(console.error);
     }
   </script>
 
