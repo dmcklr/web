@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="styles1.css">
 </head>
 <body>
-    <div class="screen">
+    <div class="screen1">
         <img src="red-bg.png" class="red-bg" alt="">
         <div class="pics">
             <img src="images/berlin.jpg" alt="" class="active">
@@ -23,30 +23,24 @@
             <img src="images/deka.jpg" alt="">
             <img src="images/trail.jpg" alt="">
         </div>
-
-
         <header class="header">
             <div class="welcome">
-                <h1>Welcome</h1>
-                <h2>Distributors Meeting 2025</h2>
+                <h1>Welcome</h1>                
             </div>
             <div class="logo">
                 <!-- Optional: Hier könnte ein <img> statt Text hin -->
                 <img src="https://images.raceresult.com/website/logo-white.png" alt="">
-            </div>
-            
+            </div>            
         </header>
 
-        <main class="main-content">            
+        <main class="main-content">
+            <span id="current-time"></span>           
         </main>
-
-        <footer class="footer">          
-        </footer>
     </div>
 </body>
 
 <script>
-    const intervalTime = 5000;
+    const intervalTime = 8000;
 const pics = document.querySelectorAll('.pics img');
 let index = 0;
 
@@ -55,5 +49,19 @@ setInterval(() => {
     index = (index + 1) % pics.length;             // nächste, mit Rücksprung
     pics[index].classList.add('active');           // neue setzen
 }, intervalTime);
+
+function updateTime() {
+    const now = new Date();
+
+    // Stunden & Minuten immer zweistellig
+    const hours = String(now.getHours()).padStart(2, "0");
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+
+    document.getElementById("current-time").textContent = `${hours}:${minutes}`;
+}
+// sofort setzen
+updateTime();
+// jede Sekunde aktualisieren
+setInterval(updateTime, 1000);
 </script>
 </html>
