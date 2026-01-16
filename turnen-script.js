@@ -24,32 +24,74 @@ fetch("turnen.json")
     const nameLabel = document.getElementById("selectedLabel"); // optional
     const h1Name = document.getElementById("h1name");
 
+    // ---------- Hilfsfunktionen ----------
+    function setVideo(section, geraet, level) {
+      const source = section.querySelector("source");
+      const video = section.querySelector("video");
+
+      source.src = `videos/${geraet}-p${level}.mp4`;
+      video.load();
+
+      const levelSpan = section.querySelector(".level");
+      if (levelSpan) levelSpan.textContent = level;
+    }
+
+    function removeClones(geraet) {
+      document
+        .querySelectorAll(`.video-section[data-clone-of="${geraet}"]`)
+        .forEach((el) => el.remove());
+    }
+
     // ---------- Person auswählen ----------
     function selectPerson(name) {
       if (!names[name]) return;
 
       h1Name.textContent = name;
       if (nameLabel) nameLabel.textContent = name;
-
       setCookie("selectedName", name, 30);
 
       const person = names[name];
       const sections = document.querySelectorAll(".video-section");
 
       sections.forEach((section) => {
-        const geraet = section.dataset.geraet; // z.B. "barren"
-        const level = person[geraet];          // z.B. "3"
+        const geraet = section.dataset.geraet;
+        const value = person[geraet];
 
-        if (!level) return;
+        // alte Klone entfernen
+        removeClones(geraet);
 
-        const source = section.querySelector("source");
-        const video = section.querySelector("video");
+        if (!value) {
+          section.style.display = "none";
+          return;
+        }
 
-        source.src = `videos/${geraet}-p${level}.mp4`;
-        video.load();
+        // macht aus "3" → ["3"] und aus ["4","5"] → ["4","5"]
+        const levels = Array.isArray(value) ? value : [value];
 
-        const levelSpan = section.querySelector(".level");
-        if (levelSpan) levelSpan.textContent = level;
+        // Original-Block für erstes Level
+        section.style.display = "";
+        setVideo(section, geraet, levels[0]);
+
+       // Weitere Levels → klonen
+      for (let i = 1; i < levels.length; i++) {
+        const clone = section.cloneNode(true);
+        clone.dataset.cloneOf = geraet;
+
+        // Überschrift im Klon anpassen (Level + Prefix)
+        const h2 = clone.querySelector("h2");
+        if (h2) {
+          // ersetzt z.B. " - P4" am Ende durch " - P5"
+          h2.textContent = h2.textContent.replace(/\s*-\s*P\d+\s*$/, ` - P${levels[i]}`);
+
+          // optional: "Alternative: " prependen (nur wenn noch nicht vorhanden)
+          if (!h2.textContent.startsWith("Alternative: ")) {
+            h2.textContent = "Alternative: " + h2.textContent;
+          }
+        }
+
+        setVideo(clone, geraet, levels[i]);
+        section.insertAdjacentElement("afterend", clone);
+      }
       });
     }
 
@@ -62,6 +104,7 @@ fetch("turnen.json")
         option.textContent = name;
         select.appendChild(option);
       });
+
     // ---------- Auswahl ändern ----------
     select.addEventListener("change", (e) => {
       selectPerson(e.target.value);
