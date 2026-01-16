@@ -14,6 +14,17 @@ function getCookie(name) {
   return null;
 }
 
+// ---------- Sichtbarkeit ----------
+function showMain() {
+  document.querySelector("main").style.display = "";
+  document.getElementById("please-select").style.display = "none";
+}
+
+function showPleaseSelect() {
+  document.querySelector("main").style.display = "none";
+  document.getElementById("please-select").style.display = "";
+}
+
 // ---------- JSON laden ----------
 fetch("turnen.json")
   .then((response) => response.json())
@@ -21,7 +32,7 @@ fetch("turnen.json")
     const names = data.list;
 
     const select = document.getElementById("nameSelect");
-    const nameLabel = document.getElementById("selectedLabel"); // optional
+    const nameLabel = document.getElementById("selectedLabel");
     const h1Name = document.getElementById("h1name");
 
     // ---------- Hilfsfunktionen ----------
@@ -46,6 +57,8 @@ fetch("turnen.json")
     function selectPerson(name) {
       if (!names[name]) return;
 
+      showMain(); // ✅ main einblenden / Hinweis ausblenden
+
       h1Name.textContent = name;
       if (nameLabel) nameLabel.textContent = name;
       setCookie("selectedName", name, 30);
@@ -57,7 +70,6 @@ fetch("turnen.json")
         const geraet = section.dataset.geraet;
         const value = person[geraet];
 
-        // alte Klone entfernen
         removeClones(geraet);
 
         if (!value) {
@@ -65,33 +77,24 @@ fetch("turnen.json")
           return;
         }
 
-        // macht aus "3" → ["3"] und aus ["4","5"] → ["4","5"]
         const levels = Array.isArray(value) ? value : [value];
 
-        // Original-Block für erstes Level
         section.style.display = "";
         setVideo(section, geraet, levels[0]);
 
-       // Weitere Levels → klonen
-      for (let i = 1; i < levels.length; i++) {
-        const clone = section.cloneNode(true);
-        clone.dataset.cloneOf = geraet;
+        // Weitere Levels → klonen
+        for (let i = 1; i < levels.length; i++) {
+          const clone = section.cloneNode(true);
+          clone.dataset.cloneOf = geraet;
 
-        // Überschrift im Klon anpassen (Level + Prefix)
-        const h2 = clone.querySelector("h2");
-        if (h2) {
-          // ersetzt z.B. " - P4" am Ende durch " - P5"
-          h2.textContent = h2.textContent.replace(/\s*-\s*P\d+\s*$/, ` - P${levels[i]}`);
-
-          // optional: "Alternative: " prependen (nur wenn noch nicht vorhanden)
-          if (!h2.textContent.startsWith("Alternative: ")) {
-            h2.textContent = "Alternative: " + h2.textContent;
+          const h2 = clone.querySelector("h2");
+          if (h2) {
+            h2.textContent = `Alternative: ${h2.textContent.replace(/\s*P\d+$/, "")}P${levels[i]}`;
           }
-        }
 
-        setVideo(clone, geraet, levels[i]);
-        section.insertAdjacentElement("afterend", clone);
-      }
+          setVideo(clone, geraet, levels[i]);
+          section.insertAdjacentElement("afterend", clone);
+        }
       });
     }
 
@@ -110,11 +113,13 @@ fetch("turnen.json")
       selectPerson(e.target.value);
     });
 
-    // ---------- Cookie beim Laden prüfen ----------
+    // ---------- Startzustand ----------
     const savedName = getCookie("selectedName");
     if (savedName && names[savedName]) {
       select.value = savedName;
       selectPerson(savedName);
+    } else {
+      showPleaseSelect(); // ✅ kein Cookie → Hinweis anzeigen
     }
   })
   .catch((error) => {
