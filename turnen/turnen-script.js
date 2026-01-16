@@ -14,6 +14,15 @@ function getCookie(name) {
   return null;
 }
 
+document.addEventListener("play", (e) => {
+  if (e.target.tagName !== "VIDEO") return;
+
+  document.querySelectorAll("video").forEach((video) => {
+    if (video !== e.target) video.pause();
+  });
+}, true); // capture!
+
+
 // ---------- Sichtbarkeit ----------
 function showMain() {
   document.querySelector("main").style.display = "";
@@ -96,6 +105,8 @@ fetch("turnen.json")
           section.insertAdjacentElement("afterend", clone);
         }
       });
+      
+
     }
 
     // ---------- Dropdown füllen ----------
