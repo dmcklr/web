@@ -8,14 +8,6 @@
             "ringe" : "4",
             "pferd" :  "4"
         },
-        "David M" : {
-            "boden" : "3",
-            "reck" : "3",
-            "sprung" : "4",
-            "barren" : "3",
-            "ringe" : "3",
-            "pferd" : "3"
-        }, 
         "Joas" : {
             "boden" : "3",
             "reck" : "3",
@@ -24,6 +16,14 @@
             "ringe" : "4",
             "pferd" : "3"
         },
+        "David M" : {
+            "boden" : "3",
+            "reck" : "3",
+            "sprung" : "4",
+            "barren" : "3",
+            "ringe" : "3",
+            "pferd" : "3"
+        }, 
         "Levi" : {
             "boden" : "4",
             "reck" : "4",
