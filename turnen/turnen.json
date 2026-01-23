@@ -6,7 +6,7 @@
             "sprung" : "4",
             "barren" : "4",
             "ringe" : "4",
-            "pferd" :  ["3", "4"]
+            "pferd" :  "4"
         },
         "David M" : {
             "boden" : "3",
@@ -34,16 +34,16 @@
         },
         "Leonard" : {
             "boden" : "4",
-            "reck" : "3",
+            "reck" : "5",
             "sprung" : "4",
             "barren" : "4",
             "ringe" : "4",
-            "pferd" : "3"
+            "pferd" : "4"
         },
         "Manuel" : {
             "boden" : "4",
             "reck" : "3",
-            "sprung" : "4",
+            "sprung" : "5",
             "barren" : "4",
             "ringe" : "3",
             "pferd" : "3"
@@ -53,8 +53,8 @@
             "reck" : "5",
             "sprung" : "5",
             "barren" : ["4","5"],
-            "ringe" : "4",
-            "pferd" :  ["4","5"]
+            "ringe" : "5",
+            "pferd" :  "4"
         },
         "Jakob V" : {
             "boden" : "5",
