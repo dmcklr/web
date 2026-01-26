@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+ 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +12,7 @@
     <link rel="stylesheet" href="styles1.css">
 </head>
 <body>
-    <div class="screen1">
+    <div class="screen1" style="">
         <img src="red-bg.png" class="red-bg" alt="">
         <div class="pics">
             <img src="images/berlin.jpg" alt="" class="active">
@@ -34,10 +35,23 @@
         </header>
 
         <main class="main-content">
-            <span id="current-time"></span>           
+            <div  id="stats">
+                <div><img src="icons/thermo.svg" alt=""><span id="temp">-</span></div>
+                 <div><img src="icons/clock.svg" alt=""><span id="current-time"></span>     </div>
+            </div>
         </main>
     </div>
 </body>
+ <script>
+            async function fetchTemperature(lat, lon) {
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=49.0046&longitude=8.5277&current_weather=true`;
+  const res = await fetch(url);
+  const data = await res.json();
+  document.getElementById("temp").textContent = data.current_weather.temperature + " °C";
+}
+
+fetchTemperature(49.01, 8.40); // Beispielkoordinaten für Karlsruhe
+</script>
 
 <script>
     const intervalTime = 8000;

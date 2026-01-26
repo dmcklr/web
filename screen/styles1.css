@@ -25,6 +25,8 @@ body {
     gap: 24px;
     overflow: hidden;
     position: relative;
+    padding: 3rem;
+    
 }
 .screen1 .red-bg {
     position:absolute;
@@ -51,10 +53,27 @@ body {
     flex-direction: column;
     gap: 24px;
     justify-content: flex-end;
+    z-index:100;
+    font-size:2rem;
+}
+.screen1  .main-content > #stats {    
+    display:flex;
+    align-items: flex-end;
+    gap:3rem;
+
+}
+#stats > div {
+    display:flex;
+    align-items: center;
+}
+#stats > div > img {
+    margin-right:0.5rem;
+    height:1.8rem;
+    opacity:0.6;
 }
 .screen1 h1 {
     font-size:10rem;
-    margin-left:5rem;
+    margin-left:1rem;
     margin-top:6rem;
     font-weight:600;
 }
@@ -95,12 +114,4 @@ body {
 }
 .screen1 .logo img {
     height:10rem
-}
-#current-time {
-    z-index:10;
-    font-size:2.5rem;
-    color: #fff;
-    margin-left:5rem;
-    padding-bottom: 4rem;
-
 }
