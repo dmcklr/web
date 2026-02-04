@@ -23,13 +23,14 @@
       flex-direction: column;
     }
 
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.75rem 1rem;
-      border-bottom: 1px solid #efefef;
-    }
+header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #efefef;
+    gap: 1rem;
+}
 
     header h1 {
       margin: 0;
@@ -38,17 +39,17 @@
       color: #e5e7eb;
     }
 
-    #toggleMenuBtn {
-      padding: 0.4rem 0.9rem;
+    #toggleMenuBtn {      
       border-radius: 999px;
-      border: 0;
-      background: #efefef;
+      border: 0;      
       cursor: pointer;
       font-size: 0.875rem;
       display: inline-flex;
       align-items: center;
       color: #808080;
       gap: 0.35rem;
+      width: 2rem;
+      margin-bottom: -0.3rem;
     }
 
     #toggleMenuBtn:focus-visible {
@@ -71,7 +72,7 @@
     #playerContainer {
       width: 100%;
       max-width: 1200px;
-      border-radius: 0.75rem;  
+      border-radius: 0.25rem;  
       overflow: hidden;
       margin-top: -5rem;
     }
@@ -125,11 +126,11 @@
     }
 
     .menu-header {
-      padding: 0.75rem 0 0.75rem 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 0.5rem;
+        padding: 0.75rem 0 0.75rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 0.5rem;
     }
 
     .menu-header h2 {
@@ -140,13 +141,13 @@
     }
 
     #closeMenuBtn {
-      border: none;
-      background: transparent;
-      color: #c41011;
-      cursor: pointer;
-      font-size: 2rem;
-      padding: 0 2rem;
-      border-radius: 1rem;
+        border: none;
+        background: transparent;
+        color: #c41011;
+        cursor: pointer;
+        font-size: 2rem;
+        padding: 0.25rem 0.75rem;
+        border-radius: 1rem;
     }
 
     #closeMenuBtn:hover {
@@ -256,10 +257,11 @@
 
   <main>
     <header>
+      <svg  id="toggleMenuBtn" type="button" aria-haspopup="true" aria-expanded="false" class="burger-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#c41011" stroke-width="1.25" stroke-linecap="round" aria-hidden="true">
+				<path d="M4 7h16M4 12h16M4 17h16"></path>
+			</svg>      
       <img src="https://images.raceresult.com/website/logo-red.svg" alt="" style="height:2rem;">
-      <button id="toggleMenuBtn" type="button" aria-haspopup="true" aria-expanded="false">
-        <span>All Videos</span>
-      </button>
+        
     </header>
 
     <section class="video-wrapper">
