@@ -35,7 +35,7 @@ function showPleaseSelect() {
 }
 
 // ---------- JSON laden ----------
-fetch("turnen.json")
+fetch("turnen.json?v=1")
   .then((response) => response.json())
   .then((data) => {
     const names = data.list;

@@ -33,17 +33,17 @@
             "pferd" : "3"
         },
         "Leonard" : {
-            "boden" : "5",
+            "boden" : ["4","5"],
             "reck" : "5",
-            "sprung" : "5",
+            "sprung" : "4",
             "barren" : "4",
-            "ringe" : "4",
+            "ringe" : "5",
             "pferd" : "4"
         },
         "Manuel" : {
             "boden" : "4",
             "reck" : "3",
-            "sprung" : "5",
+            "sprung" : "4",
             "barren" : "4",
             "ringe" : "3",
             "pferd" : "3"
@@ -51,8 +51,8 @@
         "Valentin" : {
             "boden" : "5",
             "reck" : "5",
-            "sprung" : "5",
-            "barren" : "4",
+            "sprung" : "4",
+            "barren" : ["4", "5"],
             "ringe" : "5",
             "pferd" :  "4"
         },
@@ -65,9 +65,9 @@
             "pferd" : "5"
         },
         "Jonathan" : {
-            "boden" : "4",
+            "boden" : "5",
             "reck" : "5",
-            "sprung" : "5",
+            "sprung" : "4",
             "barren" : ["4","5"],
             "ringe" : "5",
             "pferd" : "4"
