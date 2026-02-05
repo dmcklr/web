@@ -49,7 +49,7 @@ fetch("turnen.json")
       const source = section.querySelector("source");
       const video = section.querySelector("video");
 
-      source.src = `videos/${geraet}-p${level}.mp4`;
+      source.src = `videos/${geraet}-p${level}.mp4?v=1`;
       video.load();
 
       const levelSpan = section.querySelector(".level");
