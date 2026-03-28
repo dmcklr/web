@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration 1</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<div id="registration-container"></div>
+
+<script src="app.js"></script>
+<script src="header.js"></script>
+<script>
+loadApiData((setupData, error) => {
+    if (error) {
+        document.getElementById('registration-container').innerHTML = `<p>${error}</p>`;
+        return;
+    }
+    renderRegistrationWidget(setupData, 'Registration1', 'registration-container');
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Links - Presenter & Kiosks</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<div id="links-content">
+    <h1>Links</h1>
+    <div id="presenters-section"></div>
+    <div id="kiosks-section"></div>
+</div>
+
+<script src="app.js"></script>
+<script src="header.js"></script>
+<script>
+loadApiData((setupData, error) => {
+    const contentDiv = document.getElementById('links-content');
+    
+    if (error) {
+        contentDiv.innerHTML = `<h1>Links</h1><p>${error}</p>`;
+        return;
+    }
+    
+    const presentersContainer = document.getElementById('presenters-section');
+    const kiosksContainer = document.getElementById('kiosks-section');
+
+    // Presenter Links anzeigen
+    const presenters = [];
+    Object.keys(setupData).forEach(key => {
+        if (key.startsWith('Presenter') && setupData[key]) {
+            presenters.push({ key, url: setupData[key] });
+        }
+    });
+
+    if (presenters.length > 0) {
+        const h2 = document.createElement('h2');
+        h2.textContent = 'Presenters';
+        presentersContainer.appendChild(h2);
+        
+        const ul = document.createElement('ul');
+        ul.className = 'links-list';
+        
+        presenters.forEach(item => {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = item.url;
+            a.textContent = item.key;
+            a.target = '_blank';
+            li.appendChild(a);
+            ul.appendChild(li);
+        });
+        
+        presentersContainer.appendChild(ul);
+    }
+
+    // Kiosk Links anzeigen
+    const kiosks = [];
+    Object.keys(setupData).forEach(key => {
+        if (key.startsWith('Kiosk') && setupData[key]) {
+            kiosks.push({ key, url: setupData[key] });
+        }
+    });
+
+    if (kiosks.length > 0) {
+        const h2 = document.createElement('h2');
+        h2.textContent = 'Kiosks';
+        kiosksContainer.appendChild(h2);
+        
+        const ul = document.createElement('ul');
+        ul.className = 'links-list';
+        
+        kiosks.forEach(item => {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = item.url;
+            a.textContent = item.key;
+            a.target = '_blank';
+            li.appendChild(a);
+            ul.appendChild(li);
+        });
+        
+        kiosksContainer.appendChild(ul);
+    }
+
+    // Wenn keine Links vorhanden
+    if (presenters.length === 0 && kiosks.length === 0) {
+        contentDiv.innerHTML = '<h1>Links</h1><p>No Presenter or Kiosk links available for this user.</p>';
+    }
+});
+</script>
+
+</body>
+</html>
