@@ -1,42 +1,50 @@
 // Zentrale API-Loader Funktion
 const API_URL = 'https://api.raceresult.com/390351/YDXQ614X0VBQSI53DT2GIBJC2YN9IMTQ';
+const DEFAULT_USERNAME = 'default';
 
 // Cache für API-Daten (nur im RAM, wird beim Seitenwechsel geleert)
 let apiDataCache = null;
 let apiLoadingPromise = null;
+let pendingCallbacks = [];
 
-// Username aus URL-Parameter setzen oder aus Session Storage holen
+// Username aus URL-Parameter setzen oder aus localStorage holen
 function getUsername() {
     const urlParams = new URLSearchParams(window.location.search);
     const firstnameParam = urlParams.get('u');
     
-    // Wenn u Parameter vorhanden, Username im Session Storage speichern und Cache leeren
+    // 1) URL-Parameter prüfen
     if (firstnameParam) {
-        const oldUsername = sessionStorage.getItem('Username');
-        sessionStorage.setItem('Username', firstnameParam);
+        const oldUsername = localStorage.getItem('Username');
+        localStorage.setItem('Username', firstnameParam);
         
         // Cache leeren wenn sich der Username geändert hat
         if (oldUsername !== firstnameParam) {
             apiDataCache = null;
             apiLoadingPromise = null;
+            pendingCallbacks = [];
             console.log('Cache cleared - Username changed to:', firstnameParam);
         }
         
+        console.log('Username from URL parameter:', firstnameParam);
         return firstnameParam;
     }
     
-    // Sonst aus Session Storage holen
-    return sessionStorage.getItem('Username');
+    // 2) localStorage prüfen
+    const storedUsername = localStorage.getItem('Username');
+    if (storedUsername) {
+        console.log('Username from localStorage:', storedUsername);
+        return storedUsername;
+    }
+    
+    // 3) Fallback auf "default" User
+    console.log('No username found, using default user');
+    localStorage.setItem('Username', DEFAULT_USERNAME);
+    return DEFAULT_USERNAME;
 }
 
-// API-Daten für aktuellen Username laden (mit Caching)
+// API-Daten für aktuellen Username laden (mit Caching und Callback-Queue)
 function loadApiData(callback) {
     const username = getUsername();
-    
-    if (!username) {
-        callback(null, 'No username set. Please add parameter ?u=YourName to the URL.');
-        return;
-    }
     
     // Wenn Daten bereits im Cache sind und der Username passt, diese verwenden
     if (apiDataCache && apiDataCache.username === username) {
@@ -45,21 +53,18 @@ function loadApiData(callback) {
         return;
     }
     
-    // Wenn bereits ein API-Call läuft, darauf warten
+    // Wenn bereits ein API-Call läuft, Callback zur Warteschlange hinzufügen
     if (apiLoadingPromise) {
-        console.log('Waiting for ongoing API call...');
-        apiLoadingPromise.then(() => {
-            if (apiDataCache && apiDataCache.username === username) {
-                callback(apiDataCache.data, null);
-            } else {
-                callback(null, 'Error loading data from cache.');
-            }
-        });
+        console.log('Adding callback to queue (API call already in progress)');
+        pendingCallbacks.push(callback);
         return;
     }
     
+    // Ersten Callback zur Warteschlange hinzufügen
+    pendingCallbacks.push(callback);
+    
     // Neuer API-Call
-    console.log('Loading API data from server for:', username);
+    console.log('Starting new API call for:', username);
     apiLoadingPromise = fetch(API_URL)
         .then(response => response.json())
         .then(data => {
@@ -74,16 +79,29 @@ function loadApiData(callback) {
                     data: matchingEntry,
                     timestamp: Date.now()
                 };
-                console.log('API data loaded and cached for:', username);
-                callback(matchingEntry, null);
+                console.log('API data loaded and cached for:', username, '- notifying', pendingCallbacks.length, 'callback(s)');
+                
+                // Alle wartenden Callbacks benachrichtigen
+                const callbacks = [...pendingCallbacks];
+                pendingCallbacks = [];
+                callbacks.forEach(cb => cb(matchingEntry, null));
             } else {
-                callback(null, `No data found for "${username}".`);
+                console.log('No data found for:', username);
+                const callbacks = [...pendingCallbacks];
+                pendingCallbacks = [];
+                callbacks.forEach(cb => cb(null, `No data found for "${username}".`));
             }
+            
             apiLoadingPromise = null;
         })
         .catch(error => {
             console.error('Error loading API:', error);
-            callback(null, 'Error loading data from API. Please try again later.');
+            
+            // Alle wartenden Callbacks über Fehler benachrichtigen
+            const callbacks = [...pendingCallbacks];
+            pendingCallbacks = [];
+            callbacks.forEach(cb => cb(null, 'Error loading data from API. Please try again later.'));
+            
             apiLoadingPromise = null;
         });
 }
