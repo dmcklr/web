@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SamplePage</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="index.css">
 </head>
-<body>
+<body class="bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen">
 
-<div id="welcome-container">
-    <h1>Welcome</h1>
-    <p id="welcome-message">Loading setup...</p>
+<div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div id="welcome-container" class="py-16 text-center">
+        <h1 class="text-5xl font-bold text-slate-800 mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Welcome</h1>
+        <p id="welcome-message" class="text-lg text-slate-600">Loading setup...</p>
+    </div>
 </div>
 
 <script src="app.js"></script>
