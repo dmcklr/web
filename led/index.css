@@ -36,6 +36,12 @@
         width: 100%;
         height: 100%;
     }
+    .event .text-top .event-text-layer p {
+        margin:0;
+    }
+        .event .text-top .event-text-layer p.top2 {
+       font-size:20px;
+    }
 
     .event .text-top .event-text-layer {
         margin: 0;
@@ -45,6 +51,11 @@
         font-size: 30px;
         font-weight: 400;
         line-height: 36px;
+    }
+    .event .text-top .event-text-layer.top2 {
+        font-size: 22px;
+        font-weight: 300;
+        line-height: 28px;
     }
     
     .event .text-bottom {

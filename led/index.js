@@ -1,5 +1,5 @@
 // Global einstellbar (Sekunden): window.EVENT_SWITCH_SECONDS = 5;
-window.EVENT_SWITCH_SECONDS = window.EVENT_SWITCH_SECONDS ?? 8;
+window.EVENT_SWITCH_SECONDS = window.EVENT_SWITCH_SECONDS ?? 2;
 
 let currentEventIndex = 0;
 let slideshowTimerId = null;
@@ -61,7 +61,16 @@ function renderTextLayers() {
     }
 
     renderLayers(dom.textTop, events, "event-text-layer", (layer, event) => {
-        layer.innerHTML = event.top;
+        const el1 = document.createElement("p");
+        el1.className = "top1";
+        el1.innerHTML = event.top1 ?? event.top ?? "";
+
+        const el2 = document.createElement("p");
+        el2.className = "top2";
+        el2.innerHTML = event.tzop2 ?? event.top2 ?? "";
+
+        layer.appendChild(el1);
+        layer.appendChild(el2);
     });
 
     renderLayers(dom.textBottom, events, "event-text-layer", (layer, event) => {
