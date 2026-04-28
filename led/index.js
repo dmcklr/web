@@ -1,21 +1,19 @@
 // Global einstellbar (Sekunden):
-window.EVENT_SWITCH_SECONDS = window.EVENT_SWITCH_SECONDS ?? 7;
+window.EVENT_SWITCH_SECONDS = window.EVENT_SWITCH_SECONDS ?? 8;
 
 let currentEventIndex = 0;
 let slideshowTimerId = null;
 
 const dom = {
-    textTop: null,
     textBottom: null,
     image: null
 };
 
 function cacheDom() {
-    if (!dom.textTop) dom.textTop = document.querySelector(".text-top-layers");
     if (!dom.textBottom) dom.textBottom = document.querySelector(".text-bottom-layers");
     if (!dom.image) dom.image = document.querySelector(".image");
 
-    return Boolean(dom.textTop && dom.textBottom && dom.image);
+    return Boolean(dom.textBottom && dom.image);
 }
 
 function getEventById(eventId) {
@@ -60,21 +58,17 @@ function renderTextLayers() {
         return;
     }
 
-    renderLayers(dom.textTop, events, "event-text-layer", (layer, event) => {
+    renderLayers(dom.textBottom, events, "event-text-layer", (layer, event) => {
         const el1 = document.createElement("p");
-        el1.className = "top1";
-        el1.innerHTML = event.top1 ?? event.top ?? "";
+        el1.className = "text1";
+        el1.innerHTML = event.text1 ?? event.top1 ?? event.top ?? "";
 
         const el2 = document.createElement("p");
-        el2.className = "top2";
-        el2.innerHTML = event.tzop2 ?? event.top2 ?? "";
+        el2.className = "text2";
+        el2.innerHTML = event.text2 ?? event.tzop2 ?? event.top2 ?? "";
 
         layer.appendChild(el1);
         layer.appendChild(el2);
-    });
-
-    renderLayers(dom.textBottom, events, "event-text-layer", (layer, event) => {
-        layer.innerHTML = event.bottom;
     });
 }
 
@@ -99,7 +93,6 @@ function showTextLayer(eventIndex) {
         return;
     }
 
-    setVisibleLayer(dom.textTop, "event-text-layer", eventIndex);
     setVisibleLayer(dom.textBottom, "event-text-layer", eventIndex);
 }
 
