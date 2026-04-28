@@ -1,5 +1,5 @@
 // Global einstellbar (Sekunden):
-window.EVENT_SWITCH_SECONDS = window.EVENT_SWITCH_SECONDS ?? 8;
+window.EVENT_SWITCH_SECONDS = window.EVENT_SWITCH_SECONDS ?? 9;
 
 let currentEventIndex = 0;
 let slideshowTimerId = null;
