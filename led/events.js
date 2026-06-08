@@ -13,20 +13,21 @@ const events = [
     {
         id: "capeepic",       
         text1: "Cape Epic ",
-        text2: "Worlds's most famous stage race",        
+        text2: "World's most famous stage race",        
     },       
 
-    /*
-    {
-        id: "marbella",       
-        text1: "Ironman 70.3",
-        text2: "World Championship Marbella",        
-    },
+
     {
         id: "erzberg",       
         text1: "Erzberg Rodeo",        
         text2: "Toughest enduro race worldwide",       
     }
+/*
+    {
+        id: "marbella",       
+        text1: "Ironman 70.3",
+        text2: "World Championship Marbella",        
+    },
 
     // Weitere Events können hier hinzugefügt werden
     */
