@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Markdown Reader</title>
+
+  <style>
+    :root {
+      color-scheme: light dark;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      color: #222;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 20px;
+      background: #222;
+      color: white;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    input[type="file"] {
+      margin-left: auto;
+    }
+
+    main {
+      max-width: 900px;
+      min-height: calc(100vh - 70px);
+      margin: 20px auto;
+      padding: 30px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.12);
+    }
+
+    #dropZone {
+      padding: 40px;
+      border: 2px dashed #999;
+      border-radius: 10px;
+      text-align: center;
+      color: #666;
+    }
+
+    #content {
+      line-height: 1.65;
+      overflow-wrap: break-word;
+    }
+
+    #content img {
+      max-width: 100%;
+    }
+
+    #content pre {
+      overflow-x: auto;
+      padding: 16px;
+      background: #1e1e1e;
+      color: #eee;
+      border-radius: 6px;
+    }
+
+    #content code {
+      font-family: Consolas, monospace;
+    }
+
+    #content blockquote {
+      margin-left: 0;
+      padding-left: 15px;
+      border-left: 4px solid #888;
+      color: #555;
+    }
+
+    #content table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    #content th,
+    #content td {
+      padding: 8px;
+      border: 1px solid #aaa;
+      text-align: left;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #121212;
+        color: #eee;
+      }
+
+      main {
+        background: #202020;
+      }
+
+      #dropZone {
+        color: #bbb;
+      }
+
+      #content blockquote {
+        color: #bbb;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Markdown Reader</h1>
+
+    <input
+      id="fileInput"
+      type="file"
+      accept=".md,.markdown,text/markdown,text/plain"
+    >
+  </header>
+
+  <main>
+    <div id="dropZone">
+      Markdown-Datei hier hineinziehen<br>
+      oder oben eine Datei auswählen.
+    </div>
+
+    <article id="content" hidden></article>
+  </main>
+
+  <!-- Markdown-Bibliothek -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <script>
+    const fileInput = document.getElementById("fileInput");
+    const dropZone = document.getElementById("dropZone");
+    const content = document.getElementById("content");
+
+    function showMarkdown(file) {
+      if (!file) {
+        return;
+      }
+
+      const validExtension =
+        file.name.toLowerCase().endsWith(".md") ||
+        file.name.toLowerCase().endsWith(".markdown");
+
+      if (!validExtension) {
+        alert("Bitte eine Markdown-Datei auswählen.");
+        return;
+      }
+
+      const reader = new FileReader();
+
+      reader.onload = function (event) {
+        const markdownText = event.target.result;
+
+        content.innerHTML = marked.parse(markdownText);
+        content.hidden = false;
+        dropZone.hidden = true;
+
+        document.title = file.name + " – Markdown Reader";
+      };
+
+      reader.onerror = function () {
+        alert("Die Datei konnte nicht gelesen werden.");
+      };
+
+      reader.readAsText(file, "UTF-8");
+    }
+
+    fileInput.addEventListener("change", function () {
+      showMarkdown(fileInput.files[0]);
+    });
+
+    document.addEventListener("dragover", function (event) {
+      event.preventDefault();
+    });
+
+    document.addEventListener("drop", function (event) {
+      event.preventDefault();
+
+      const file = event.dataTransfer.files[0];
+      showMarkdown(file);
+    });
+  </script>
+</body>
+</html>
