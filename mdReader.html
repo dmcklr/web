@@ -40,6 +40,24 @@
       margin-left: auto;
     }
 
+    #pdfBtn {
+      padding: 8px 16px;
+      font-size: 14px;
+      color: white;
+      background: #444;
+      border: 1px solid #666;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    #pdfBtn:hover {
+      background: #555;
+    }
+
+    #pdfBtn[hidden] {
+      display: none;
+    }
+
     main {
       max-width: 900px;
       min-height: calc(100vh - 70px);
@@ -98,6 +116,51 @@
       text-align: left;
     }
 
+    @media print {
+      body {
+        background: white;
+        color: #000;
+      }
+
+      header {
+        display: none;
+      }
+
+      main {
+        max-width: none;
+        min-height: 0;
+        margin: 0;
+        padding: 0;
+        background: white;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      #content {
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      #content pre {
+        background: #f0f0f0;
+        color: #000;
+        border: 1px solid #ccc;
+      }
+
+      #content pre,
+      #content blockquote,
+      #content table,
+      #content img {
+        page-break-inside: avoid;
+      }
+
+      #content h1,
+      #content h2,
+      #content h3 {
+        page-break-after: avoid;
+      }
+    }
+
     @media (prefers-color-scheme: dark) {
       body {
         background: #121212;
@@ -128,6 +191,8 @@
       type="file"
       accept=".md,.markdown,text/markdown,text/plain"
     >
+
+    <button id="pdfBtn" type="button" hidden>PDF</button>
   </header>
 
   <main>
@@ -146,6 +211,7 @@
     const fileInput = document.getElementById("fileInput");
     const dropZone = document.getElementById("dropZone");
     const content = document.getElementById("content");
+    const pdfBtn = document.getElementById("pdfBtn");
 
     function showMarkdown(file) {
       if (!file) {
@@ -169,6 +235,7 @@
         content.innerHTML = marked.parse(markdownText);
         content.hidden = false;
         dropZone.hidden = true;
+        pdfBtn.hidden = false;
 
         document.title = file.name + " – Markdown Reader";
       };
@@ -182,6 +249,10 @@
 
     fileInput.addEventListener("change", function () {
       showMarkdown(fileInput.files[0]);
+    });
+
+    pdfBtn.addEventListener("click", function () {
+      window.print();
     });
 
     document.addEventListener("dragover", function (event) {
