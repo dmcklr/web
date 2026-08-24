@@ -10,6 +10,11 @@ const events = [
         text1: "Challenge Roth 2026",
         text2: "7:21:04 - World Best Time",        
     }, 
+        {
+        id: "buenoaires",       
+        text1: "Buenos Aires 21K",
+        text2: "56:51 – World Record",
+    }, 
 /*
     {
         id: "erzberg",       
