@@ -1,0 +1,67 @@
+   body{
+        margin: 0;
+    }
+    body > div{
+        background: rgb(200, 200, 200);
+        width:384px;
+        height: 768px;      
+        margin: 0 auto;
+        /* background: linear-gradient(110deg, rgb(232, 66, 66), rgb(147, 2, 2));*/
+        background-color: #a81815;
+        color:white;
+        font-size: 1.2rem;
+        font-family: Arial;
+        position: relative;   
+        overflow:hidden;
+        text-align:center;
+        padding-top:30px;
+    }
+    .logo-outer {
+        width: 85%;
+        margin: 0 auto;
+    }
+    .number-outer{
+        background-color: #000;
+        margin: 0 auto;
+        border-radius: 0.5rem;
+        width:85%;
+        margin-top:30px;
+    }
+    .number {
+        font-size: 4rem;
+        line-height:4.25rem;
+        margin-top:10px;
+        margin-bottom:10px;
+        color: yellow;
+        font-weight:bold;
+    }
+    .qr-outer {
+        width:35%;
+        margin: 0 auto;
+        margin-top:20px;
+        padding: 10px;
+        border-radius: 0.5rem;
+        background-color: #fff;
+    }
+    .qr{
+        width:100%;
+    }
+
+    .l2 {
+        font-size:1.25rem;
+        margin-bottom: 40px
+    }
+    .l3 {
+        font-weight:600;
+        font-size:1.8rem;
+    }
+    .l4 {
+        margin-top:15px;
+        margin-bottom: 80px;
+    }
+    .l5 {
+
+    }
+    .l6 {
+        font-size:2rem;
+    }
